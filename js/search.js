@@ -10,21 +10,23 @@ const Search = (() => {
 
   let _index = null;      // array of { id, component, section, sectionLabel, text, plain }
   let _building = null;
+  let _indexLang = null;
 
   async function buildIndex() {
     const components = await ComponentLoader.getAllComponents();
     const entries = [];
+    const lang = I18N.getLang();
 
     for (const comp of components) {
-      // metadata entry
+      // metadata entry (bilingual-aware: name/description may have _en / _ko variants)
       const metaText = [
-        comp.name, comp.manufacturer, comp.category,
-        ...(comp.models || []), ...(comp.keywords || []), comp.description
+        I18N.field(comp, 'name'), comp.manufacturer, I18N.catLabel(comp.category),
+        ...(comp.models || []), ...(comp.keywords || []), I18N.field(comp, 'description')
       ].filter(Boolean).join(' ');
 
       entries.push({
         id: comp.id, component: comp, section: null, sectionLabel: 'Component',
-        text: metaText.toLowerCase(), plain: comp.description || ''
+        text: metaText.toLowerCase(), plain: I18N.field(comp, 'description') || ''
       });
 
       // section entries
@@ -35,18 +37,22 @@ const Search = (() => {
         const plain = MiniMarkdown.toPlainText(raw);
         entries.push({
           id: comp.id, component: comp, section: sec,
-          sectionLabel: (ComponentLoader.SECTION_META[sec] || {}).label || sec,
+          sectionLabel: ComponentLoader.sectionLabel(sec),
           text: plain.toLowerCase(), plain
         });
       }));
     }
 
+    _indexLang = lang;
     return entries;
   }
 
   async function ensureIndex() {
-    if (_index) return _index;
-    if (!_building) _building = buildIndex().then(idx => { _index = idx; return idx; });
+    const currentLang = I18N.getLang();
+    if (_index && _indexLang === currentLang) return _index;
+    if (!_building || _indexLang !== currentLang) {
+      _building = buildIndex().then(idx => { _index = idx; return idx; });
+    }
     return _building;
   }
 
@@ -71,7 +77,7 @@ const Search = (() => {
 
       let score = 0;
       if (entry.section === null) score += 50;                    // metadata match ranks high
-      if (entry.component.name.toLowerCase().includes(q)) score += 100;
+      if (I18N.field(entry.component, 'name').toLowerCase().includes(q)) score += 100;
       if ((entry.component.manufacturer || '').toLowerCase().includes(q)) score += 30;
       if ((entry.component.models || []).some(m => m.toLowerCase().includes(q))) score += 40;
       score += Math.max(0, 20 - idx);  // earlier match ranks slightly higher

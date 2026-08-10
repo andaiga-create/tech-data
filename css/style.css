@@ -91,6 +91,21 @@ img{ max-width:100%; display:block; }
 }
 .header__brand span{ color:var(--accent); }
 
+.lang-toggle{
+  flex:0 0 auto;
+  min-width:44px; height:36px;
+  padding:0 12px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  color:var(--text-dim);
+  border-radius:18px;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.lang-toggle:active{ background:var(--accent); border-color:var(--accent); color:#191100; }
+
 .main{ flex:1; padding:14px 14px 90px; max-width:720px; margin:0 auto; width:100%; }
 
 /* ---------------------------------------------------------

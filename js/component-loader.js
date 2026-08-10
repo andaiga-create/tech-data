@@ -16,14 +16,19 @@ const ComponentLoader = (() => {
   const _sectionCache = new Map();     // "id/section" -> raw markdown text
 
   const SECTION_META = {
-    overview:        { label: 'Overview',        icon: '&#128203;' },
-    inspection:      { label: 'Inspection',       icon: '&#128269;' },
-    setting:         { label: 'Setting',          icon: '&#9881;'   },
-    troubleshooting: { label: 'Troubleshooting',  icon: '&#9888;'   },
-    specifications:  { label: 'Specification',    icon: '&#128203;' },
-    documents:       { label: 'Documents',        icon: '&#128196;' },
-    photos:          { label: 'Photos',           icon: '&#128247;' }
+    overview:        { icon: '&#128203;' },
+    inspection:      { icon: '&#128269;' },
+    setting:         { icon: '&#9881;'   },
+    troubleshooting: { icon: '&#9888;'   },
+    specifications:  { icon: '&#128203;' },
+    documents:       { icon: '&#128196;' },
+    photos:          { icon: '&#128247;' }
   };
+
+  function sectionLabel(section) {
+    const key = (typeof I18N !== 'undefined' && I18N.SECTION_KEYS[section]) || null;
+    return key ? I18N.t(key) : section;
+  }
 
   async function getManifest() {
     if (_manifestCache) return _manifestCache;
@@ -52,10 +57,16 @@ const ComponentLoader = (() => {
   }
 
   async function getSectionRaw(id, section) {
-    const key = `${id}/${section}`;
+    const lang = (typeof I18N !== 'undefined') ? I18N.getLang() : 'ko';
+    const key = `${id}/${section}/${lang}`;
     if (_sectionCache.has(key)) return _sectionCache.get(key);
-    const res = await fetch(`${BASE}/${id}/${section}.md`, { cache: 'no-cache' });
+
+    // 1) try language-specific file: {section}.{lang}.md
+    let res = await fetch(`${BASE}/${id}/${section}.${lang}.md`, { cache: 'no-cache' });
+    // 2) fallback: {section}.md (default/master content)
+    if (!res.ok) res = await fetch(`${BASE}/${id}/${section}.md`, { cache: 'no-cache' });
     if (!res.ok) return null;
+
     const text = await res.text();
     _sectionCache.set(key, text);
     return text;
@@ -67,6 +78,7 @@ const ComponentLoader = (() => {
 
   return {
     SECTION_META,
+    sectionLabel,
     getManifest,
     getComponent,
     getAllComponents,

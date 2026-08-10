@@ -2,6 +2,8 @@
    app.js
    Hash-based router + rendering. No component-specific
    logic lives here — everything is driven by data files.
+   UI text comes from I18N; re-renders current route on
+   language toggle.
    ========================================================= */
 
 (() => {
@@ -35,9 +37,6 @@
   }
 
   /* ---------------- router ---------------- */
-  const routes = [];
-  function route(pattern, handler) { routes.push({ pattern, handler }); }
-
   function parseHash() {
     const hash = location.hash.replace(/^#\/?/, '');
     return hash.split('?')[0].split('/').filter(Boolean);
@@ -67,28 +66,45 @@
   }
 
   window.addEventListener('hashchange', render);
+  // language toggle re-renders whatever screen is currently open
+  I18N.onChange(() => render());
 
   /* ---------------- shell pieces ---------------- */
+  function langToggleHtml() {
+    return `<button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">${I18N.t('lang_toggle_label')}</button>`;
+  }
+
   function header({ title = null, back = null } = {}) {
     if (back) {
       return `
         <header class="header">
           <button class="header__back" data-nav="${back}" aria-label="Back">&#8592;</button>
           <div class="header__title">${title || ''}</div>
+          ${langToggleHtml()}
         </header>`;
     }
     return `
       <header class="header">
-        <div class="header__brand">FIELD<span>REF</span></div>
+        <div class="header__brand">${I18N.t('brand')}<span>${I18N.t('brandAccent')}</span></div>
+        <div style="flex:1;"></div>
+        ${langToggleHtml()}
       </header>`;
+  }
+
+  function bindLangToggle() {
+    const btn = document.getElementById('lang-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      I18N.setLang(I18N.getLang() === 'ko' ? 'en' : 'ko');
+    });
   }
 
   function tabbar(active) {
     const tabs = [
-      { key: 'home', href: '#/', icon: '&#127968;', label: 'Home' },
-      { key: 'search', href: '#/search', icon: '&#128269;', label: 'Search' },
-      { key: 'recent', href: '#/recent', icon: '&#128337;', label: 'Recent' },
-      { key: 'favorites', href: '#/favorites', icon: '&#9733;', label: 'Favorites' }
+      { key: 'home', href: '#/', icon: '&#127968;', label: I18N.t('tab_home') },
+      { key: 'search', href: '#/search', icon: '&#128269;', label: I18N.t('tab_search') },
+      { key: 'recent', href: '#/recent', icon: '&#128337;', label: I18N.t('tab_recent') },
+      { key: 'favorites', href: '#/favorites', icon: '&#9733;', label: I18N.t('tab_favorites') }
     ];
     return `
       <nav class="tabbar">
@@ -102,6 +118,7 @@
   function shell(headerHtml, mainHtml, tabbarHtml = '') {
     $app.innerHTML = `${headerHtml}<main class="main">${mainHtml}</main>${tabbarHtml}`;
     bindNavButtons();
+    bindLangToggle();
   }
 
   function bindNavButtons() {
@@ -123,10 +140,10 @@
     shell(header(), `
       <div class="search">
         <span class="search__icon">&#128269;</span>
-        <input id="home-search" placeholder="Search component, model, error keyword…" autocomplete="off">
+        <input id="home-search" placeholder="${I18N.t('search_placeholder')}" autocomplete="off">
       </div>
       <div class="chip-row" id="cat-chips"></div>
-      <div class="section-label">Components</div>
+      <div class="section-label">${I18N.t('section_components')}</div>
       <div class="card-list" id="comp-list"><div class="skeleton"></div><div class="skeleton"></div></div>
     `, tabbar('home'));
 
@@ -142,8 +159,8 @@
 
     const chipsEl = document.getElementById('cat-chips');
     function renderChips() {
-      chipsEl.innerHTML = `<button class="chip ${!activeCat ? 'active' : ''}" data-cat="">All</button>` +
-        cats.map(c => `<button class="chip ${activeCat === c ? 'active' : ''}" data-cat="${c}">${c}</button>`).join('');
+      chipsEl.innerHTML = `<button class="chip ${!activeCat ? 'active' : ''}" data-cat="">${I18N.t('chip_all')}</button>` +
+        cats.map(c => `<button class="chip ${activeCat === c ? 'active' : ''}" data-cat="${c}">${I18N.catLabel(c)}</button>`).join('');
       chipsEl.querySelectorAll('.chip').forEach(btn => {
         btn.addEventListener('click', () => {
           activeCat = btn.dataset.cat || null;
@@ -158,7 +175,7 @@
     function renderList() {
       const filtered = activeCat ? components.filter(c => c.category === activeCat) : components;
       if (!filtered.length) {
-        listEl.innerHTML = `<div class="empty-state">No components in this category.</div>`;
+        listEl.innerHTML = `<div class="empty-state">${I18N.t('empty_category')}</div>`;
         return;
       }
       listEl.innerHTML = filtered.map(c => componentCardHtml(c, favs.includes(c.id))).join('');
@@ -170,16 +187,18 @@
   }
 
   function componentCardHtml(c, isFav) {
+    const name = I18N.field(c, 'name');
+    const desc = I18N.field(c, 'description');
     return `
       <div class="comp-card" data-nav="#/component/${c.id}">
         <div class="comp-card__main">
           <div class="comp-card__top">
             <span class="cat-dot ${dotClass(c.category)}"></span>
-            <span class="comp-card__name">${c.name}</span>
+            <span class="comp-card__name">${name}</span>
           </div>
           <div class="comp-card__meta">${c.manufacturer || '—'}${c.models && c.models.length ? ' · ' + c.models.join(', ') : ''}</div>
-          <div class="comp-card__desc">${c.description || ''}</div>
-          <div class="comp-card__updated">UPDATED ${c.updated || '—'}</div>
+          <div class="comp-card__desc">${desc}</div>
+          <div class="comp-card__updated">${I18N.t('label_updated')} ${c.updated || '—'}</div>
         </div>
         <button class="comp-card__fav ${isFav ? 'active' : ''}" data-fav="${c.id}" aria-label="Toggle favorite">${isFav ? '&#9733;' : '&#9734;'}</button>
         <span class="comp-card__chevron">&#8250;</span>
@@ -208,7 +227,7 @@
     shell(header(), `
       <div class="search">
         <span class="search__icon">&#128269;</span>
-        <input id="search-input" placeholder="Search component, model, error keyword…" autocomplete="off" value="${initialQ.replace(/"/g, '&quot;')}">
+        <input id="search-input" placeholder="${I18N.t('search_placeholder')}" autocomplete="off" value="${initialQ.replace(/"/g, '&quot;')}">
         <button class="search__clear" id="search-clear">&times;</button>
       </div>
       <div class="search-results" id="search-results"></div>
@@ -223,13 +242,13 @@
     async function runSearch(q) {
       clearBtn.classList.toggle('show', !!q);
       if (!q.trim()) {
-        resultsEl.innerHTML = `<div class="search-results__empty">Type to search across all components,<br>including inspection / setting / troubleshooting content.</div>`;
+        resultsEl.innerHTML = `<div class="search-results__empty">${I18N.t('search_hint').replace(/\n/g, '<br>')}</div>`;
         return;
       }
       resultsEl.innerHTML = `<div class="skeleton"></div>`;
       const hits = await Search.search(q);
       if (!hits.length) {
-        resultsEl.innerHTML = `<div class="search-results__empty">No results for "${q}"</div>`;
+        resultsEl.innerHTML = `<div class="search-results__empty">${I18N.t('search_no_result', q)}</div>`;
         return;
       }
       resultsEl.innerHTML = hits.slice(0, 30).map(hitHtml).join('');
@@ -242,11 +261,13 @@
       const href = hit.section
         ? `#/component/${hit.id}/${hit.section}`
         : `#/component/${hit.id}`;
+      const sectionLabel = hit.section ? ComponentLoader.sectionLabel(hit.section) : I18N.field(hit.component, 'name');
+      const name = I18N.field(hit.component, 'name');
       return `
         <div class="search-hit" data-nav="${href}">
-          <div class="search-hit__section">${hit.sectionLabel}</div>
+          <div class="search-hit__section">${hit.section ? sectionLabel : I18N.t('section_overview')}</div>
           <div class="search-hit__body">
-            <div class="search-hit__name">${hit.component.name} <span style="color:var(--text-faint);font-weight:400;">— ${hit.component.manufacturer || ''}</span></div>
+            <div class="search-hit__name">${name} <span style="color:var(--text-faint);font-weight:400;">— ${hit.component.manufacturer || ''}</span></div>
             <div class="search-hit__snippet">${hit.snippet}</div>
           </div>
         </div>`;
@@ -265,11 +286,11 @@
   /* ---------------- Favorites / Recent ---------------- */
   async function renderFavorites() {
     const ids = getFavorites();
-    await renderIdList('Favorites', ids, 'favorites', 'No favorites yet. Tap the star on any component to save it here.');
+    await renderIdList(I18N.t('title_favorites'), ids, 'favorites', I18N.t('empty_favorites'));
   }
   async function renderRecent() {
     const ids = getRecent();
-    await renderIdList('Recently Viewed', ids, 'recent', 'Components you open will appear here.');
+    await renderIdList(I18N.t('title_recent'), ids, 'recent', I18N.t('empty_recent'));
   }
 
   async function renderIdList(title, ids, tabKey, emptyMsg) {
@@ -295,7 +316,7 @@
 
   /* ---------------- Component Detail ---------------- */
   async function renderComponentDetail(id) {
-    shell(header({ back: '#/', title: 'COMPONENT' }), `<div class="skeleton" style="height:140px;"></div>`, tabbar());
+    shell(header({ back: '#/', title: I18N.t('header_component').toUpperCase() }), `<div class="skeleton" style="height:140px;"></div>`, tabbar());
     const comp = await ComponentLoader.getComponent(id);
     pushRecent(id);
     const favs = getFavorites();
@@ -309,34 +330,38 @@
     ];
 
     const tilesHtml = sectionOrder.map(sec => {
-      const meta = ComponentLoader.SECTION_META[sec] || { label: sec, icon: '&#128203;' };
+      const meta = ComponentLoader.SECTION_META[sec] || { icon: '&#128203;' };
       const isPriority = priority.includes(sec);
       return `
         <div class="section-tile ${isPriority ? 'priority' : ''}" data-nav="#/component/${id}/${sec}">
           <span class="section-tile__icon">${meta.icon}</span>
-          <span class="section-tile__label">${meta.label}</span>
-          ${isPriority ? '<span class="section-tile__hint">Field priority</span>' : ''}
+          <span class="section-tile__label">${ComponentLoader.sectionLabel(sec)}</span>
+          ${isPriority ? `<span class="section-tile__hint">${I18N.t('field_priority')}</span>` : ''}
         </div>`;
     }).join('');
 
-    shell(header({ back: '#/', title: comp.category }), `
+    const catLabel = I18N.catLabel(comp.category);
+    const name = I18N.field(comp, 'name');
+    const desc = I18N.field(comp, 'description');
+
+    shell(header({ back: '#/', title: catLabel }), `
       <div class="nameplate">
         <span class="nameplate__rivet tl"></span><span class="nameplate__rivet tr"></span>
         <span class="nameplate__rivet bl"></span><span class="nameplate__rivet br"></span>
         <div class="nameplate__cat ${catClass(comp.category)}">
-          <span class="cat-dot ${dotClass(comp.category)}"></span>${comp.category}
+          <span class="cat-dot ${dotClass(comp.category)}"></span>${catLabel}
         </div>
-        <div class="nameplate__name">${comp.name}</div>
+        <div class="nameplate__name">${name}</div>
         <div class="nameplate__sub">${comp.manufacturer || '—'} &nbsp;/&nbsp; ${(comp.models || []).join(', ') || '—'}</div>
-        <div class="nameplate__desc">${comp.description || ''}</div>
-        <div class="nameplate__updated">UPDATED ${comp.updated || '—'}</div>
+        <div class="nameplate__desc">${desc}</div>
+        <div class="nameplate__updated">${I18N.t('label_updated')} ${comp.updated || '—'}</div>
       </div>
       <div class="section-grid">${tilesHtml}</div>
     `, tabbar());
 
-    // add favorite toggle into header via title area replacement
+    // favorite toggle inserted into header title area
     const headerTitle = document.querySelector('.header__title');
-    headerTitle.innerHTML = `${comp.category} <button id="fav-toggle" style="background:none;border:none;color:${isFav ? 'var(--accent)' : 'var(--text-faint)'};font-size:16px;float:right;">${isFav ? '&#9733;' : '&#9734;'}</button>`;
+    headerTitle.innerHTML = `${catLabel} <button id="fav-toggle" style="background:none;border:none;color:${isFav ? 'var(--accent)' : 'var(--text-faint)'};font-size:16px;float:right;">${isFav ? '&#9733;' : '&#9734;'}</button>`;
     document.getElementById('fav-toggle').addEventListener('click', (e) => {
       e.stopPropagation();
       const nowFavs = toggleFavorite(id);
@@ -350,9 +375,10 @@
 
   /* ---------------- Section detail ---------------- */
   async function renderSection(id, section) {
-    shell(header({ back: `#/component/${id}`, title: 'LOADING' }), `<div class="skeleton" style="height:300px;"></div>`, tabbar());
+    shell(header({ back: `#/component/${id}`, title: I18N.t('header_loading') }), `<div class="skeleton" style="height:300px;"></div>`, tabbar());
     const comp = await ComponentLoader.getComponent(id);
-    const meta = ComponentLoader.SECTION_META[section] || { label: section, icon: '' };
+    const label = ComponentLoader.sectionLabel(section);
+    const name = I18N.field(comp, 'name');
 
     let bodyHtml;
     if (section === 'documents') {
@@ -361,12 +387,12 @@
       bodyHtml = photosHtml(comp);
     } else {
       const raw = await ComponentLoader.getSectionRaw(id, section);
-      const rendered = MiniMarkdown.render(raw || `# ${meta.label}\n\nNo data available yet for this section.`);
+      const rendered = MiniMarkdown.render(raw || `# ${label}\n\n${I18N.t('no_section_data')}`);
       bodyHtml = `<div class="content-block md">${rendered}</div>`;
       if (section === 'inspection') bodyHtml += resultToggleHtml(id);
     }
 
-    shell(header({ back: `#/component/${id}`, title: `${comp.name} · ${meta.label}` }), bodyHtml, tabbar());
+    shell(header({ back: `#/component/${id}`, title: `${name} · ${label}` }), bodyHtml, tabbar());
 
     if (section === 'photos') bindPhotoEvents();
     if (section === 'documents') bindDocEvents();
@@ -375,11 +401,11 @@
 
   function documentsHtml(comp) {
     const docs = comp.documents || [];
-    if (!docs.length) return `<div class="doc-empty">No documents attached for this component yet.</div>`;
+    if (!docs.length) return `<div class="doc-empty">${I18N.t('no_documents')}</div>`;
     return `<div class="doc-list">` + docs.map(d => `
       <div class="doc-item" data-doc="components/${comp.id}/documents/${d.file}">
         <span class="doc-item__icon">&#128196;</span>
-        <span class="doc-item__name">${d.name}</span>
+        <span class="doc-item__name">${I18N.field(d, 'name')}</span>
         <span class="doc-item__go">&#8250;</span>
       </div>`).join('') + `</div>`;
   }
@@ -391,11 +417,11 @@
 
   function photosHtml(comp) {
     const imgs = comp.images || [];
-    if (!imgs.length) return `<div class="doc-empty">No photos attached for this component yet.</div>`;
+    if (!imgs.length) return `<div class="doc-empty">${I18N.t('no_photos')}</div>`;
     return `<div class="photo-grid">` + imgs.map((img, i) => `
       <div class="photo-grid__item" data-photo-index="${i}">
-        <img src="components/${comp.id}/images/${img.file}" alt="${img.caption || ''}"
-             onerror="this.parentElement.textContent='${(img.caption || img.file).replace(/'/g, '')}'">
+        <img src="components/${comp.id}/images/${img.file}" alt="${I18N.field(img, 'caption')}"
+             onerror="this.parentElement.textContent='${(I18N.field(img, 'caption') || img.file).replace(/'/g, '')}'">
       </div>`).join('') + `</div>
       <div class="lightbox" id="lightbox">
         <button class="lightbox__close" id="lightbox-close">&times;</button>
@@ -406,7 +432,6 @@
 
   let _currentPhotoSet = [];
   function bindPhotoEvents() {
-    // recover current component's images from DOM (data attr) — simplest: re-query via last render context
     const comp = _lastRenderedComponent;
     _currentPhotoSet = (comp && comp.images) || [];
     const lightbox = document.getElementById('lightbox');
@@ -418,7 +443,7 @@
         const item = _currentPhotoSet[idx];
         if (!item) return;
         imgEl.src = `components/${comp.id}/images/${item.file}`;
-        capEl.textContent = item.caption || '';
+        capEl.textContent = I18N.field(item, 'caption') || '';
         lightbox.classList.add('open');
       });
     });
@@ -430,8 +455,8 @@
     const saved = store.get(LS_RESULT_PREFIX + id, null);
     return `
       <div class="result-toggle">
-        <button class="result-btn normal ${saved === 'normal' ? 'active' : ''}" data-result="normal">NORMAL</button>
-        <button class="result-btn abnormal ${saved === 'abnormal' ? 'active' : ''}" data-result="abnormal">ABNORMAL</button>
+        <button class="result-btn normal ${saved === 'normal' ? 'active' : ''}" data-result="normal">${I18N.t('result_normal').toUpperCase()}</button>
+        <button class="result-btn abnormal ${saved === 'abnormal' ? 'active' : ''}" data-result="abnormal">${I18N.t('result_abnormal').toUpperCase()}</button>
       </div>`;
   }
   function bindResultToggle(id) {

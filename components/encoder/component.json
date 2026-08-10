@@ -5,6 +5,8 @@
   "manufacturer": "Kübler",
   "models": ["8.5810", "8.J60"],
   "description": "Rotary incremental encoder for boom/luffing angle feedback",
+  "description_en": "Rotary incremental encoder for boom/luffing angle feedback",
+  "description_ko": "붐/러핑 각도 피드백용 로터리 인크리멘탈 엔코더",
   "keywords": ["encoder", "angle sensor", "feedback", "signal error", "no feedback", "calibration error"],
   "sections": ["overview", "inspection", "setting", "troubleshooting", "specifications"],
   "documents": [

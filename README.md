@@ -90,7 +90,23 @@ HTML/JS를 전혀 수정하지 않고 아래 순서만 따르면 자동으로 �
 }
 ```
 
-## 4. Markdown 작성 규칙 (렌더러가 인식하는 문법)
+## 4. 다국어 (한글/English)
+
+화면 우측 상단 버튼으로 한글 ↔ English 를 즉시 전환할 수 있습니다. 선택한 언어는 기기에 저장되어 다음 방문 시에도 유지됩니다.
+
+- **UI 문자열**(메뉴, 버튼, 안내문구)은 `js/i18n.js` 사전에서 관리하며 이미 두 언어 모두 완성되어 있습니다.
+- **Component 본문(overview/inspection/setting/troubleshooting/specifications)**은 언어별로 별도 파일을 만들면 자동 인식됩니다:
+  - `setting.md` — 기본 자료 (특정 언어 파일이 없을 때 사용되는 대체본)
+  - `setting.ko.md` — 한글 버전 (있으면 한글 선택 시 우선 로드)
+  - `setting.en.md` — English 버전 (있으면 English 선택 시 우선 로드)
+  - 예: `components/encoder/inspection.ko.md` 참고 (실제 한글 버전 샘플)
+  - 아직 언어별 파일을 나누지 않은 컴포넌트는 지금처럼 `setting.md` 하나만으로도 정상 동작하며, 이후 필요할 때 `.ko.md` / `.en.md`로 나눠서 넣으면 그때부터 자동으로 언어별로 분리됩니다.
+- **component.json의 설명**도 언어별로 나눌 수 있습니다: `description_ko`, `description_en` 필드를 추가하면 그 값이 우선 사용되고, 없으면 기존 `description` 값이 두 언어 모두에 공통으로 쓰입니다. (`components/encoder/component.json` 예시 참고)
+- **문서(documents)/사진(images) 이름·캡션**도 같은 방식으로 `name_ko`/`name_en`, `caption_ko`/`caption_en`을 추가하면 언어별로 분리됩니다.
+
+즉, 지금 당장 모든 자료를 번역할 필요 없이 **필요한 컴포넌트부터 하나씩** 한글/영문 파일을 나눠서 채워나가면 됩니다.
+
+## 5. Markdown 작성 규칙 (렌더러가 인식하는 문법)
 
 `js/component-loader.js`의 `MiniMarkdown`이 다음 문법만 지원합니다 (외부 라이브러리 미사용):
 
@@ -102,7 +118,7 @@ HTML/JS를 전혀 수정하지 않고 아래 순서만 따르면 자동으로 �
 - 경고 블록 `> ⚠ 내용` → 노란색 Warning 박스로 렌더링 (안전 관련 정보는 반드시 이 형식 사용)
 - `---` 구분선
 
-## 5. 검색 범위
+## 6. 검색 범위
 
 `js/search.js`는 아래 항목을 모두 인덱싱합니다:
 
@@ -111,7 +127,7 @@ HTML/JS를 전혀 수정하지 않고 아래 순서만 따르면 자동으로 �
 
 검색창에 "Encoder Error", "Hydraulic Pressure Low" 같은 증상 키워드를 입력하면 해당 Troubleshooting 항목이 바로 검색됩니다.
 
-## 6. 오프라인/PWA 확장
+## 7. 오프라인/PWA 확장
 
 현재 버전은 PWA가 아니지만, 향후 다음을 추가하면 오프라인 지원으로 확장할 수 있도록 파일 구조를 분리해두었습니다:
 
@@ -119,6 +135,6 @@ HTML/JS를 전혀 수정하지 않고 아래 순서만 따르면 자동으로 �
 - `manifest.json` 을 추가해 "Add to Home Screen" 지원
 - Component 자료가 모두 정적 파일(md/json/jpg/pdf)이므로 Cache-First 전략으로 오프라인 열람이 가능합니다
 
-## 7. 향후 확장 아이디어
+## 8. 향후 확장 아이디어
 
 Component QR Code · Crane Model별 자료 묶음 · FSR Report · Claim History · RCA · Calibration Record · Maintenance History · Field Checklist 저장(현재는 Inspection 결과 Normal/Abnormal만 로컬에 저장됨) · Setting Calculator · Unit Converter · Hydraulic Pressure Calculator · Electrical Measurement Guide · Sensor Diagnostic Tool
