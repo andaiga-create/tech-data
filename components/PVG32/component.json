@@ -1,0 +1,41 @@
+{
+  "id": "pvg32",
+  "name": "PVG 32",
+  "displayName": "PVG 32 Proportional Valve Group",
+  "category": "hydraulic",
+  "manufacturer": "Sauer-Danfoss",
+  "source": {
+    "document": "PVG 32 Proportional Valve Group Technical Information",
+    "orderNumber": "520L0344",
+    "revision": "HC",
+    "date": "2013-08"
+  },
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "defaultLanguage": "ko",
+  "documents": {
+    "overview": "overview.md",
+    "setting": "setting.md",
+    "specifications": "specifications.md",
+    "inspection": "inspection.md",
+    "troubleshooting": "troubleshooting.md"
+  },
+  "localizedDocuments": {
+    "ko": "documents/ko/",
+    "en": "documents/en/"
+  },
+  "images": "images/",
+  "tags": [
+    "PVG32",
+    "PVG",
+    "Load Sensing",
+    "PVB",
+    "PVP",
+    "PVBS",
+    "PVE",
+    "Hydraulic Valve",
+    "Crane"
+  ]
+}
