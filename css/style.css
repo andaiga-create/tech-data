@@ -114,14 +114,10 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFFFFF;
-  border-radius: 9px;
-  padding: 6px 10px;
-  box-shadow: var(--shadow-sm);
 }
 
 .brand-logo {
-  height: 22px;
+  height: 26px;
   width: auto;
   display: block;
 }
