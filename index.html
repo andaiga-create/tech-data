@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Tech Flower | Field Engineer Technical Data</title>
+<meta name="description" content="Tech Flower Co., Ltd. Field Engineer Technical Data Service">
+<meta name="theme-color" content="#0B3D63">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TECH FLOWER">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-row">
+    <a href="#/" class="brand">
+      <span class="brand-mark" aria-hidden="true">TF</span>
+      <span class="brand-text">
+        <span class="brand-name">TECH FLOWER</span>
+        <span class="brand-sub" data-i18n="brandSub">Field Engineer Technical Data</span>
+      </span>
+    </a>
+    <div class="lang-toggle" role="group" aria-label="language">
+      <button id="lang-ko" class="lang-btn">KR</button>
+      <button id="lang-en" class="lang-btn">EN</button>
+    </div>
+  </div>
+  <div class="app-header-search" id="global-search-wrap">
+    <label class="search-box search-box-header" for="global-search-input">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input id="global-search-input" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Search technical information..." autocomplete="off">
+    </label>
+  </div>
+</header>
+
+<main id="app-content" class="app-content"></main>
+
+<nav class="bottom-nav" aria-label="primary">
+  <a href="#/" id="nav-home" class="active">
+    <span class="nav-icon" aria-hidden="true">🏠</span>
+    <span class="nav-label" data-i18n="navHome">Home</span>
+  </a>
+  <a href="#/search" id="nav-search">
+    <span class="nav-icon" aria-hidden="true">🔍</span>
+    <span class="nav-label" data-i18n="navSearch">Search</span>
+  </a>
+  <a href="#/favorites" id="nav-favorites">
+    <span class="nav-icon" aria-hidden="true">★</span>
+    <span class="nav-label" data-i18n="navFavorites">Favorites</span>
+  </a>
+  <a href="#/recent" id="nav-recent">
+    <span class="nav-icon" aria-hidden="true">🕘</span>
+    <span class="nav-label" data-i18n="navRecent">Recent</span>
+  </a>
+</nav>
+
+<script src="js/i18n.js"></script>
+<script src="js/component-loader.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
