@@ -72,7 +72,7 @@
     "name": { "ko": "로드리미터 (과부하방지장치)", "en": "Load Limiter" },
     "model": "SH-1200A",
     "manufacturer": "SHINHAN ELECTRONICS (신한전자)",
-    "category": "safety",
+    "category": "electrical",
     "description": { "ko": "크레인 과부하를 검지하여 경보·차단하는 안전장치", "en": "Safety device that detects crane overload and triggers alarm/cutoff" },
     "keywords": ["load limiter", "SH-1200A", "로드리미터", "과부하방지", "overload", "E-01", "E-02", "E-03", "E-04", "SPE-6.5T", "SBCA-X", "SLD-404", "신한전자", "SHINHAN"],
     "updated": "2026-08-12",
