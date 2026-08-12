@@ -96,9 +96,14 @@ async function router() {
   const { parts, query } = parseHash();
   setActiveNav(parts);
 
-  // 홈이 아니면 헤더에 검색바 노출
-  if (parts[0] === "" || parts.length === 0) {
-    searchBarWrap.classList.remove("is-hidden-header-search");
+  // 검색창 중복 방지: Home 화면은 Hero 검색창만 노출하고
+  // 헤더의 전역 검색창은 숨긴다. 그 외 화면은 헤더 검색창만 노출한다.
+  const isHome = parts.length === 0;
+  searchBarWrap.classList.toggle("is-hidden-header-search", isHome);
+
+  // 검색 화면 진입 시 헤더 검색창에 현재 검색어를 반영한다.
+  if (parts[0] === "search") {
+    searchInput.value = query.q || "";
   }
 
   try {
@@ -200,54 +205,54 @@ function componentCardHtml(c) {
 
 async function renderSearch(initialQuery) {
   appEl.innerHTML = `
-    <section class="section">
-      <label class="search-box search-box-page" for="search-page-input">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input id="search-page-input" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="${t("searchPlaceholder")}" autocomplete="off" value="${escapeAttr(initialQuery)}">
-      </label>
+    <section class="section search-section">
       <div id="search-results" class="search-results"></div>
     </section>
   `;
 
-  const input = document.getElementById("search-page-input");
+  // 검색 입력은 헤더의 전역 검색창 하나만 사용한다 (중복 제거).
+  searchInput.focus();
+  if (initialQuery) await runHeaderSearch(initialQuery);
+}
+
+/**
+ * 헤더 검색창 값으로 검색을 실행하고, 현재 화면이 검색 결과 화면일 때만
+ * #search-results 영역을 갱신한다. (Home/Component 등 다른 화면에서는 무시)
+ */
+async function runHeaderSearch(q) {
   const resultsEl = document.getElementById("search-results");
+  if (!resultsEl) return; // 검색 화면이 아니면 아무 것도 하지 않는다
 
-  const runSearch = async (q) => {
-    if (!q.trim()) {
-      resultsEl.innerHTML = "";
-      return;
-    }
-    resultsEl.innerHTML = `<div class="empty-state"><p>${t("loading")}</p></div>`;
-    const lang = getCurrentLang();
-    const components = await loadComponentsList();
-    const byId = Object.fromEntries(components.map((c) => [c.id, c]));
-    const results = await searchAll(q, lang);
+  if (!q.trim()) {
+    resultsEl.innerHTML = "";
+    return;
+  }
+  resultsEl.innerHTML = `<div class="empty-state"><p>${t("loading")}</p></div>`;
+  const lang = getCurrentLang();
+  const components = await loadComponentsList();
+  const byId = Object.fromEntries(components.map((c) => [c.id, c]));
+  const results = await searchAll(q, lang);
 
-    if (!results.length) {
-      resultsEl.innerHTML = `<div class="empty-state"><p>${t("noResults")}</p></div>`;
-      return;
-    }
+  if (!results.length) {
+    resultsEl.innerHTML = `<div class="empty-state"><p>${t("noResults")}</p></div>`;
+    return;
+  }
 
-    resultsEl.innerHTML = `<p class="results-count">${results.length} ${t("resultsCount")}</p>` +
-      results.map((r) => {
-        const comp = byId[r.componentId];
-        if (!comp) return "";
-        const href = r.section ? `#/component/${r.componentId}/${r.section}` : `#/component/${r.componentId}`;
-        return `
-          <a class="result-card" href="${href}">
-            <div class="result-card-icon">${sectionIcon(r.section || "overview")}</div>
-            <div class="result-card-body">
-              <div class="result-card-title">${r.title}</div>
-              <div class="result-card-snippet">${r.snippet}</div>
-            </div>
-          </a>
-        `;
-      }).join("");
-  };
-
-  input.addEventListener("input", debounce(() => runSearch(input.value), 250));
-  input.focus();
-  if (initialQuery) await runSearch(initialQuery);
+  resultsEl.innerHTML = `<p class="results-count">${results.length} ${t("resultsCount")}</p>` +
+    results.map((r) => {
+      const comp = byId[r.componentId];
+      if (!comp) return "";
+      const href = r.section ? `#/component/${r.componentId}/${r.section}` : `#/component/${r.componentId}`;
+      return `
+        <a class="result-card" href="${href}">
+          <div class="result-card-icon">${sectionIcon(r.section || "overview")}</div>
+          <div class="result-card-body">
+            <div class="result-card-title">${r.title}</div>
+            <div class="result-card-snippet">${r.snippet}</div>
+          </div>
+        </a>
+      `;
+    }).join("");
 }
 
 async function renderFavorites() {
@@ -488,6 +493,13 @@ function setupGlobalSearch() {
       searchInput.blur();
     }
   });
+
+  // 검색 화면에 있을 때는 입력할 때마다 실시간으로 결과를 갱신한다.
+  searchInput.addEventListener("input", debounce(() => {
+    const { parts } = parseHash();
+    if (parts[0] !== "search") return;
+    runHeaderSearch(searchInput.value);
+  }, 250));
 }
 
 /* ---------------- Init ---------------- */
