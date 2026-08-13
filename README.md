@@ -19,7 +19,9 @@
 │  ├─ component-loader.js    # components.json / Markdown 로더 + 렌더러
 │  └─ search.js              # 전문(全文) 검색 인덱스
 ├─ data/
-│  └─ components.json        # 전체 Component 목록 및 메타데이터 (유일한 JSON)
+│  ├─ components.json        # 전체 Component 목록 및 메타데이터 (유일한 JSON)
+│  └─ references.json        # 참고자료(오일 점도표 등) 목록 메타데이터
+├─ references/                # 참고자료 원본 파일 (PDF/이미지)
 ├─ components/
 │  ├─ encoder/
 │  │  ├─ overview.ko.md / overview.en.md
@@ -51,7 +53,31 @@
 
 ---
 
-## 3. 새 Component 추가 방법 (HTML/JS 수정 불필요)
+## 3. Reference(참고자료) 추가 방법
+
+Component와 별개로, 특정 부품에 종속되지 않는 간단한 참고자료(예: 유압유 점도 조견표, 규격 대조표, 현장 참고사진 등)는 Home 화면의 **참고자료** 탭에 노출된다. Component처럼 페이지를 만들 필요 없이 파일 하나 + JSON 항목 하나로 끝난다.
+
+1. `references/` 폴더에 실제 파일(PDF 또는 이미지)을 넣는다.
+2. `data/references.json`에 항목을 추가한다.
+   ```json
+   {
+     "id": "hydraulic-oil-chart",
+     "title": { "ko": "유압유 점도 조견표", "en": "Hydraulic Oil Viscosity Chart" },
+     "description": { "ko": "ISO VG 등급별 권장 사용 온도", "en": "Recommended operating temperature by ISO VG grade" },
+     "type": "pdf",
+     "file": "references/hydraulic-oil-viscosity-chart.pdf",
+     "updated": "2026-08-13"
+   }
+   ```
+   - `type`은 `pdf` 또는 `image` 둘 중 하나.
+   - `file`은 프로젝트 루트 기준 경로(`references/...`)로 적는다.
+3. Git Commit / Push 한다.
+
+Component와 마찬가지로 HTML/JS 수정은 필요 없다. `data/references.json`이 빈 배열일 때는 참고자료 탭에 "등록된 참고자료가 없습니다" 안내만 표시된다.
+
+---
+
+## 4. 새 Component 추가 방법 (HTML/JS 수정 불필요)
 
 1. `components/` 아래에 새 폴더를 만든다. (예: `components/gearbox/`)
 2. 그 안에 아래 10개 Markdown 파일과 `images/`, `documents/` 폴더를 만든다.
@@ -90,7 +116,7 @@
 
 ---
 
-## 4. 언어(한/영) 관리 규칙
+## 5. 언어(한/영) 관리 규칙
 
 - UI 텍스트: `js/i18n.js`의 딕셔너리에 키를 추가하면 즉시 한/영 전환에 반영된다.
 - 기술자료: `[section].ko.md` / `[section].en.md`를 각각 관리한다. 언어 전환 버튼(KR/EN)을 누르면 현재 보고 있는 Section의 동일 언어 파일로 자동 전환된다.
@@ -98,7 +124,7 @@
 
 ---
 
-## 5. Markdown 작성 규칙 (component-loader.js가 지원하는 문법)
+## 6. Markdown 작성 규칙 (component-loader.js가 지원하는 문법)
 
 - 제목: `##`, `###`, `####`
 - 표: 일반 GitHub 스타일 `| ... | ... |`
@@ -109,7 +135,7 @@
 
 ---
 
-## 6. 로컬 확인 방법
+## 7. 로컬 확인 방법
 
 정적 파일이므로 별도 빌드가 필요 없다. 로컬에서 확인하려면 프로젝트 루트에서 간단한 정적 서버를 실행한다.
 
@@ -122,7 +148,7 @@ python3 -m http.server 8080
 
 ---
 
-## 7. 향후 확장 (PWA / Offline)
+## 8. 향후 확장 (PWA / Offline)
 
 - Service Worker를 추가하여 Markdown/이미지/문서를 캐싱하면 선박 현장의 불안정한 네트워크 환경에서도 오프라인으로 자료를 열람할 수 있다.
 - `manifest.json`을 추가하면 iPhone 홈 화면에 아이콘으로 추가(Add to Home Screen)할 수 있다.
