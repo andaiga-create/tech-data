@@ -64,12 +64,19 @@ body {
     linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 28px 28px;
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
-  min-height: 100dvh;
-  padding-bottom: calc(var(--bottom-nav-h) + var(--safe-bottom) + 32px);
+  /* App-shell layout: header + scrollable content + bottom nav are real
+     flex children stacked in a fixed-height viewport, so the bottom nav
+     can never visually overlap the content — there is no "gap" for it to
+     cover, only its own reserved row. This structurally prevents the
+     content-hidden-behind-nav bug regardless of list length. */
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -85,12 +92,9 @@ img { max-width: 100%; display: block; }
 /* ---------------- Header ---------------- */
 
 .app-header {
-  position: sticky;
-  top: 0;
+  flex: none;
   z-index: 40;
-  background: rgba(19, 25, 35, 0.92);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding-top: var(--safe-top);
 }
@@ -225,8 +229,12 @@ img { max-width: 100%; display: block; }
 /* ---------------- Layout ---------------- */
 
 .app-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   max-width: 720px;
   margin: 0 auto;
+  width: 100%;
   padding: 0 0 24px;
 }
 
@@ -242,6 +250,85 @@ img { max-width: 100%; display: block; }
   color: var(--muted);
   margin: 4px 0 12px;
 }
+
+/* ---------------- Content tabs (Components / Reference) ---------------- */
+
+.content-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.content-tab {
+  flex: 1;
+  text-align: center;
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 11px 12px;
+  border-radius: var(--radius-md);
+  min-height: 44px;
+}
+
+.content-tab.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #0A0E14;
+}
+
+/* ---------------- Reference list ---------------- */
+
+.reference-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reference-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  min-height: 44px;
+  box-shadow: var(--shadow-sm);
+}
+.reference-card:hover { border-color: var(--border-strong); }
+
+.reference-card-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.reference-card-body { flex: 1; min-width: 0; }
+.reference-card-title { font-weight: 700; font-size: 14.5px; color: var(--text); margin-bottom: 2px; }
+.reference-card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 6px; }
+.reference-card-type {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+.reference-card-arrow { flex: none; color: var(--muted-soft); font-size: 18px; }
 
 /* ---------------- Category chips ---------------- */
 
@@ -770,31 +857,13 @@ img { max-width: 100%; display: block; }
 /* ---------------- Bottom nav ---------------- */
 
 .bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex: none;
   display: flex;
-  background: rgba(19, 25, 35, 0.88);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background: var(--surface);
   border-top: 1px solid var(--border);
   padding-bottom: var(--safe-bottom);
   z-index: 50;
-  box-shadow: 0 -8px 24px rgba(0,0,0,0.35);
-}
-
-/* 콘텐츠가 하단 고정 메뉴에 가려지지 않도록, 마지막 카드/리스트 뒤에
-   충분한 여백과 함께 부드러운 페이드를 넣어 "더 있음"을 시각적으로 알려준다. */
-.bottom-nav::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100%;
-  height: 28px;
-  background: linear-gradient(to top, rgba(10,14,20,0.55), transparent);
-  pointer-events: none;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.25);
 }
 
 .bottom-nav a {
