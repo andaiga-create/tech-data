@@ -8,6 +8,7 @@
  */
 
 let COMPONENTS_CACHE = null;
+let REFERENCES_CACHE = null;
 
 async function loadComponentsList() {
   if (COMPONENTS_CACHE) return COMPONENTS_CACHE;
@@ -15,6 +16,24 @@ async function loadComponentsList() {
   if (!res.ok) throw new Error("components.json load failed");
   COMPONENTS_CACHE = await res.json();
   return COMPONENTS_CACHE;
+}
+
+/**
+ * data/references.json 로드.
+ * Reference는 특정 부품(Component)에 종속되지 않는 간단한 참고자료
+ * (예: 오일 점도표, 규격 조견표 등) 목록이다. 파일이 없거나 비어 있어도
+ * 정상 동작하도록 관대하게 처리한다.
+ */
+async function loadReferencesList() {
+  if (REFERENCES_CACHE) return REFERENCES_CACHE;
+  try {
+    const res = await fetch("data/references.json");
+    if (!res.ok) { REFERENCES_CACHE = []; return REFERENCES_CACHE; }
+    REFERENCES_CACHE = await res.json();
+  } catch (e) {
+    REFERENCES_CACHE = [];
+  }
+  return REFERENCES_CACHE;
 }
 
 async function getComponentById(id) {

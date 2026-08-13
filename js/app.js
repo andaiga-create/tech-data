@@ -156,28 +156,67 @@ async function renderHome() {
     </section>
 
     <section class="section">
-      <h2 class="section-title" data-i18n="componentsTitle">${t("componentsTitle")}</h2>
+      <div class="content-tabs" id="content-tabs" role="tablist">
+        <button class="content-tab is-active" data-tab="components" role="tab" aria-selected="true">${t("tabComponents")}</button>
+        <button class="content-tab" data-tab="reference" role="tab" aria-selected="false">${t("tabReference")}</button>
+      </div>
+      <div id="tab-panel"></div>
+    </section>
+  `;
+
+  const panel = document.getElementById("tab-panel");
+  const tabsEl = document.getElementById("content-tabs");
+
+  const showComponentsPanel = () => {
+    panel.innerHTML = `
       <div class="chip-row" id="category-chips">
         ${categories.map((c, idx) => `<button class="chip ${idx === 0 ? "chip-active" : ""}" data-cat="${c}">${c === "all" ? t("categoryAll") : categoryLabel(c)}</button>`).join("")}
       </div>
       <div class="card-grid" id="component-grid"></div>
-    </section>
-  `;
+    `;
 
-  const grid = document.getElementById("component-grid");
-  const renderGrid = (cat) => {
-    const filtered = cat === "all" ? components : components.filter((c) => c.category === cat);
-    grid.innerHTML = filtered.map(componentCardHtml).join("") ||
-      `<div class="empty-state"><p>${t("noResults")}</p></div>`;
+    const grid = document.getElementById("component-grid");
+    const renderGrid = (cat) => {
+      const filtered = cat === "all" ? components : components.filter((c) => c.category === cat);
+      grid.innerHTML = filtered.map(componentCardHtml).join("") ||
+        `<div class="empty-state"><p>${t("noResults")}</p></div>`;
+    };
+    renderGrid("all");
+
+    document.getElementById("category-chips").addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      document.querySelectorAll("#category-chips .chip").forEach((c) => c.classList.remove("chip-active"));
+      btn.classList.add("chip-active");
+      renderGrid(btn.dataset.cat);
+    });
   };
-  renderGrid("all");
 
-  document.getElementById("category-chips").addEventListener("click", (e) => {
-    const btn = e.target.closest(".chip");
+  const showReferencePanel = async () => {
+    panel.innerHTML = `<div class="empty-state"><p>${t("loading")}</p></div>`;
+    const references = await loadReferencesList();
+    panel.innerHTML = `<div class="reference-list" id="reference-list"></div>`;
+    document.getElementById("reference-list").innerHTML =
+      references.map(referenceCardHtml).join("") ||
+      `<div class="empty-state"><p>${t("noReferences")}</p></div>`;
+  };
+
+  showComponentsPanel();
+
+  tabsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".content-tab");
     if (!btn) return;
-    document.querySelectorAll("#category-chips .chip").forEach((c) => c.classList.remove("chip-active"));
-    btn.classList.add("chip-active");
-    renderGrid(btn.dataset.cat);
+    tabsEl.querySelectorAll(".content-tab").forEach((b) => {
+      b.classList.remove("is-active");
+      b.setAttribute("aria-selected", "false");
+    });
+    btn.classList.add("is-active");
+    btn.setAttribute("aria-selected", "true");
+    if (btn.dataset.tab === "reference") {
+      showReferencePanel();
+    } else {
+      showComponentsPanel();
+    }
   });
 
   const homeInput = document.getElementById("home-search-input");
@@ -186,6 +225,24 @@ async function renderHome() {
       location.hash = `#/search?q=${encodeURIComponent(homeInput.value.trim())}`;
     }
   });
+}
+
+function referenceCardHtml(ref) {
+  const lang = getCurrentLang();
+  const isImage = ref.type === "image";
+  const typeLabel = isImage ? t("referenceTypeImage") : t("referenceTypePdf");
+  const icon = isImage ? "🖼️" : "📄";
+  return `
+    <a class="reference-card" href="${ref.file}" target="_blank" rel="noopener">
+      <div class="reference-card-icon">${icon}</div>
+      <div class="reference-card-body">
+        <div class="reference-card-title">${(ref.title && ref.title[lang]) || (ref.title && ref.title.ko) || ""}</div>
+        <div class="reference-card-desc">${(ref.description && ref.description[lang]) || ""}</div>
+        <span class="reference-card-type">${typeLabel}</span>
+      </div>
+      <div class="reference-card-arrow" aria-hidden="true">›</div>
+    </a>
+  `;
 }
 
 function componentCardHtml(c) {
