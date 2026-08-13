@@ -19,6 +19,21 @@
 
 > ℹ Auto-tuning starts from roughly 2/3 of the target SV. Run it with the heater/cooler actually responding for an accurate result.
 
+### Set values
+
+- ALH : 70
+- ALL : 60
+- P : 0000
+- A : 0000
+- I : 0000
+- d : 0000
+- LbA : 0001
+- C : 20
+- HYS : 10
+- F-r : Default value
+- U-r : Default value
+- LoC : 0000
+
 ### Control operation direction (SL9)
 
 | Setting | Meaning |
