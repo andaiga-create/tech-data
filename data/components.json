@@ -95,5 +95,21 @@
       { "file": "documents/DX-series-manual-ko.pdf", "title": { "ko": "DX Series 취급설명서 (국문)", "en": "DX Series Instruction Manual (Korean)" }, "type": "service-manual" },
       { "file": "documents/DX-series-manual-en.pdf", "title": { "ko": "DX Series Instruction Manual (영문)", "en": "DX Series Instruction Manual (English)" }, "type": "service-manual" }
     ]
+  },
+  {
+    "id": "load-limiter-jdl100",
+    "name": { "ko": "로드리미터 (JDL-100/JDLS-70)", "en": "Load Limiter (JDL-100/JDLS-70)" },
+    "model": "JDL-100 / JDLS-70",
+    "manufacturer": "정호엔지니어링 (JUNGHO ENGINEERING)",
+    "category": "safety",
+    "description": { "ko": "AC 모터 과부하를 CT로 검지하여 릴레이로 전원을 차단하는 호이스트/크레인용 과부하방지장치", "en": "Overload protector for hoists/cranes that senses AC motor overcurrent via CT and cuts power through a relay" },
+    "keywords": ["load limiter", "과부하방지장치", "JDL-100", "JDLS-70", "정호엔지니어링", "JUNGHO", "JUNGHO ENGINEERING", "SafeGuard", "overload", "CT", "전류변성기", "auto reset", "자동복귀", "L mode", "H mode", "hoist", "crane"],
+    "updated": "2026-08-13",
+    "images": [],
+    "documents": [
+      { "file": "documents/JDL-100-manual-ko.pdf", "title": { "ko": "로드리미터 취급설명서 (국문)", "en": "Load Limiter Instruction Manual (Korean)" }, "type": "service-manual" },
+      { "file": "documents/JDL-100-manual-en.pdf", "title": { "ko": "Load Limiter Specification & Instruction (영문)", "en": "Load Limiter Specification & Instruction (English)" }, "type": "service-manual" },
+      { "file": "documents/JDL-100-wiring-diagram.pdf", "title": { "ko": "JDL-100 전동호이스트 결선도", "en": "JDL-100 Electric Hoist Wiring Diagram" }, "type": "wiring-diagram" }
+    ]
   }
 ]
