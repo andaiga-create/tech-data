@@ -80,5 +80,20 @@
     "documents": [
       { "file": "documents/SH-1200A_User_Manual.pdf", "title": { "ko": "SH-1200A User Manual (D0LB231023 Rev.0)", "en": "SH-1200A User Manual (D0LB231023 Rev.0)" }, "type": "service-manual" }
     ]
+  },
+  {
+    "id": "dx-temp-controller",
+    "name": { "ko": "디지털 온도조절계 (DX Series)", "en": "Digital Temperature Controller (DX Series)" },
+    "model": "DX series (DX4 / DX6 / DX7 / DX9)",
+    "manufacturer": "한영넉스 (HANYOUNG NUX)",
+    "category": "electrical",
+    "description": { "ko": "PID 방식으로 온도를 측정하고 히터/쿨러를 구동하는 디지털 온도조절계", "en": "PID digital temperature controller that measures temperature and drives a heater/cooler" },
+    "keywords": ["DX series", "온도조절계", "temperature controller", "PID", "한영넉스", "HANYOUNG NUX", "오토튜닝", "auto-tuning", "LBA", "loop break alarm", "Pt100", "RTD", "SSR", "OOOO", "UUUU"],
+    "updated": "2026-08-13",
+    "images": [],
+    "documents": [
+      { "file": "documents/DX-series-manual-ko.pdf", "title": { "ko": "DX Series 취급설명서 (국문)", "en": "DX Series Instruction Manual (Korean)" }, "type": "service-manual" },
+      { "file": "documents/DX-series-manual-en.pdf", "title": { "ko": "DX Series Instruction Manual (영문)", "en": "DX Series Instruction Manual (English)" }, "type": "service-manual" }
+    ]
   }
 ]
