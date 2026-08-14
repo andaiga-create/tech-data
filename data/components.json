@@ -101,7 +101,7 @@
     "name": { "ko": "로드리미터 (JDL-100/JDLS-70)", "en": "Load Limiter (JDL-100/JDLS-70)" },
     "model": "JDL-100 / JDLS-70",
     "manufacturer": "정호엔지니어링 (JUNGHO ENGINEERING)",
-    "category": "electrical",
+    "category": "safety",
     "description": { "ko": "AC 모터 과부하를 CT로 검지하여 릴레이로 전원을 차단하는 호이스트/크레인용 과부하방지장치", "en": "Overload protector for hoists/cranes that senses AC motor overcurrent via CT and cuts power through a relay" },
     "keywords": ["load limiter", "과부하방지장치", "JDL-100", "JDLS-70", "정호엔지니어링", "JUNGHO", "JUNGHO ENGINEERING", "SafeGuard", "overload", "CT", "전류변성기", "auto reset", "자동복귀", "L mode", "H mode", "hoist", "crane"],
     "updated": "2026-08-13",
@@ -110,6 +110,20 @@
       { "file": "documents/JDL-100-manual-ko.pdf", "title": { "ko": "로드리미터 취급설명서 (국문)", "en": "Load Limiter Instruction Manual (Korean)" }, "type": "service-manual" },
       { "file": "documents/JDL-100-manual-en.pdf", "title": { "ko": "Load Limiter Specification & Instruction (영문)", "en": "Load Limiter Specification & Instruction (English)" }, "type": "service-manual" },
       { "file": "documents/JDL-100-wiring-diagram.pdf", "title": { "ko": "JDL-100 전동호이스트 결선도", "en": "JDL-100 Electric Hoist Wiring Diagram" }, "type": "wiring-diagram" }
+    ]
+  },
+  {
+    "id": "np100-program-controller",
+    "name": { "ko": "프로그램 컨트롤러 (NP100)", "en": "Program Controller (NP100)" },
+    "model": "NP100",
+    "manufacturer": "한영넉스 (HANYOUNG NUX)",
+    "category": "electrical",
+    "description": { "ko": "패턴/세그먼트 기반 온도 프로그램 제어가 가능한 한영넉스 프로그램 온도조절계", "en": "HANYOUNG NUX program temperature controller supporting pattern/segment-based temperature profile control" },
+    "keywords": ["NP100", "프로그램컨트롤러", "program controller", "한영넉스", "HANYOUNG NUX", "패턴", "세그먼트", "segment", "PID", "오토튜닝", "auto-tuning", "RS485", "프로그램모드", "엔지니어링모드", "ramp soak"],
+    "updated": "2026-08-14",
+    "images": [],
+    "documents": [
+      { "file": "documents/NP100-manual-ko.pdf", "title": { "ko": "NP100 프로그램컨트롤러 사용설명서 (국문)", "en": "NP100 Program Controller Instruction Manual (Korean)" }, "type": "service-manual" }
     ]
   }
 ]
