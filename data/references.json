@@ -5,5 +5,12 @@
     "title": { "ko": "선회베어링 로킹 테스트(마모 측정) 절차", "en": "Rocking Test (Wear Measurement) Procedure for Slewing Bearing" },
     "description": { "ko": "해상 크레인 선회베어링(Slewing Bearing)의 마모를 점검하는 로킹 테스트 측정 절차, 베어링 볼 직경별 최대 허용 간극표, 그리스 샘플링 절차", "en": "Rocking-test measurement procedure for checking wear on marine crane slewing bearings, maximum permissible clearance table by ball diameter, and grease sampling procedure" },
     "type": "pdf"
+  },
+  {
+    "id": "lubricating-oil-plan",
+    "file": "references/lubricating-oil-plan.pdf",
+    "title": { "ko": "윤활유 추천 브랜드표 (Lubricating Oil Plan)", "en": "Lubricating Oil Plan — Recommended Brands" },
+    "description": { "ko": "SHELL, ESSO/MOBIL, CALTEX/TEXACO, TOTAL, CHEVRON, BP&CASTROL, GULF, SK 등 제조사별 유압유·기어유·와이어로프/오픈기어유·베어링 그리스 추천 브랜드를 주위온도(-20~10℃ / 10~50℃) 구간별로 정리한 표", "en": "Recommended hydraulic oil, gear oil, wire rope/open gear lubricant, and bearing grease brands by manufacturer (SHELL, ESSO/MOBIL, CALTEX/TEXACO, TOTAL, CHEVRON, BP&CASTROL, GULF, SK), organized by ambient temperature range (-20 to 10°C / 10 to 50°C)" },
+    "type": "pdf"
   }
 ]
