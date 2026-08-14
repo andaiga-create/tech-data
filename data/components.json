@@ -1,129 +1,417 @@
 [
   {
     "id": "encoder",
-    "name": { "ko": "엔코더", "en": "Encoder" },
+    "name": {
+      "ko": "엔코더",
+      "en": "Encoder"
+    },
     "model": "E80H / E100",
     "manufacturer": "Heidenhain",
     "category": "electrical",
-    "description": { "ko": "위치 및 회전 피드백 장치", "en": "Position and rotation feedback device" },
-    "keywords": ["encoder", "feedback", "position", "rotation", "alarm", "signal", "엔코더", "피드백"],
+    "description": {
+      "ko": "위치 및 회전 피드백 장치",
+      "en": "Position and rotation feedback device"
+    },
+    "keywords": [
+      "encoder",
+      "feedback",
+      "position",
+      "rotation",
+      "alarm",
+      "signal",
+      "엔코더",
+      "피드백"
+    ],
     "updated": "2026-06-01",
     "images": [
-      { "file": "images/nameplate.svg", "caption": { "ko": "엔코더 명판 (Nameplate)", "en": "Encoder nameplate" } },
-      { "file": "images/mounting.svg", "caption": { "ko": "장착 위치 및 커플링", "en": "Mounting location and coupling" } }
+      {
+        "file": "images/nameplate.svg",
+        "caption": {
+          "ko": "엔코더 명판 (Nameplate)",
+          "en": "Encoder nameplate"
+        }
+      },
+      {
+        "file": "images/mounting.svg",
+        "caption": {
+          "ko": "장착 위치 및 커플링",
+          "en": "Mounting location and coupling"
+        }
+      }
     ],
     "documents": [
-      { "file": "documents/encoder-datasheet.pdf", "title": { "ko": "엔코더 Datasheet", "en": "Encoder Datasheet" }, "type": "datasheet" }
+      {
+        "file": "documents/encoder-datasheet.pdf",
+        "title": {
+          "ko": "엔코더 Datasheet",
+          "en": "Encoder Datasheet"
+        },
+        "type": "datasheet"
+      }
     ]
   },
   {
     "id": "hydraulic-pump",
-    "name": { "ko": "유압 펌프", "en": "Hydraulic Pump" },
+    "name": {
+      "ko": "유압 펌프",
+      "en": "Hydraulic Pump"
+    },
     "model": "XPI 140",
     "manufacturer": "Danfoss",
     "category": "hydraulic",
-    "description": { "ko": "유압 시스템용 가변 용량 펌프", "en": "Variable displacement pump for hydraulic system" },
-    "keywords": ["pump", "hydraulic", "pressure", "LS", "flow", "펌프", "유압", "압력"],
+    "description": {
+      "ko": "유압 시스템용 가변 용량 펌프",
+      "en": "Variable displacement pump for hydraulic system"
+    },
+    "keywords": [
+      "pump",
+      "hydraulic",
+      "pressure",
+      "LS",
+      "flow",
+      "펌프",
+      "유압",
+      "압력"
+    ],
     "updated": "2026-05-20",
     "images": [
-      { "file": "images/pump-overview.svg", "caption": { "ko": "펌프 외형 및 포트 배치", "en": "Pump outline and port layout" } },
-      { "file": "images/pump-adjustment.svg", "caption": { "ko": "LS Pressure Adjustment Screw 위치", "en": "LS pressure adjustment screw location" } }
+      {
+        "file": "images/pump-overview.svg",
+        "caption": {
+          "ko": "펌프 외형 및 포트 배치",
+          "en": "Pump outline and port layout"
+        }
+      },
+      {
+        "file": "images/pump-adjustment.svg",
+        "caption": {
+          "ko": "LS Pressure Adjustment Screw 위치",
+          "en": "LS pressure adjustment screw location"
+        }
+      }
     ],
     "documents": [
-      { "file": "documents/xpi140-service-manual.pdf", "title": { "ko": "XPI 140 Service Manual", "en": "XPI 140 Service Manual" }, "type": "service-manual" }
+      {
+        "file": "documents/xpi140-service-manual.pdf",
+        "title": {
+          "ko": "XPI 140 Service Manual",
+          "en": "XPI 140 Service Manual"
+        },
+        "type": "service-manual"
+      }
     ]
   },
   {
     "id": "pvg-valve",
-    "name": { "ko": "PVG 밸브", "en": "PVG Valve" },
+    "name": {
+      "ko": "PVG 32 비례제어 밸브",
+      "en": "PVG 32 Proportional Valve"
+    },
     "model": "PVG 32",
-    "manufacturer": "Danfoss",
+    "manufacturer": "Sauer-Danfoss",
     "category": "hydraulic",
-    "description": { "ko": "비례 유량 제어 밸브", "en": "Proportional flow control valve" },
-    "keywords": ["pvg", "valve", "proportional", "LS pressure", "spool", "밸브", "비례", "유압"],
-    "updated": "2026-05-28",
+    "description": {
+      "ko": "선박용 크레인 현장에서 압력 및 유량 세팅에 필요한 PVG 32 실무 자료",
+      "en": "Field reference for PVG 32 pressure and flow setting on shipboard cranes"
+    },
+    "keywords": [
+      "PVG32",
+      "PVG 32",
+      "proportional valve",
+      "load sensing",
+      "LS",
+      "main relief",
+      "PVP",
+      "LSA",
+      "LSB",
+      "pressure",
+      "flow",
+      "speed control",
+      "hoisting",
+      "luffing",
+      "slewing",
+      "비례밸브",
+      "압력세팅",
+      "유량세팅",
+      "호이스트",
+      "러핑",
+      "선회"
+    ],
+    "updated": "2026-08-14",
     "images": [
-      { "file": "images/pvg-section.svg", "caption": { "ko": "PVG 32 단면 및 스풀 구성", "en": "PVG 32 section and spool arrangement" } },
-      { "file": "images/pvg-wiring.svg", "caption": { "ko": "PVEH 코일 배선도", "en": "PVEH coil wiring diagram" } }
+      {
+        "file": "components/pvg-valve/images/pvg-valve-setting-model.png",
+        "caption": {
+          "ko": "PVG 밸브 압력 및 속도 조정 위치",
+          "en": "PVG valve pressure and speed adjustment locations"
+        }
+      }
     ],
     "documents": [
-      { "file": "documents/pvg32-technical-info.pdf", "title": { "ko": "PVG 32 Technical Information", "en": "PVG 32 Technical Information" }, "type": "datasheet" }
+      {
+        "file": "components/pvg-valve/documents/PVG-VALVE-SETTING-MODEL.pdf",
+        "title": {
+          "ko": "PVG 밸브 설정 모델 도면",
+          "en": "PVG Valve Setting Model Drawing"
+        },
+        "type": "drawing"
+      },
+      {
+        "file": "components/pvg-valve/documents/PVG32-CATALOG.pdf",
+        "title": {
+          "ko": "PVG 32 Technical Information",
+          "en": "PVG 32 Technical Information"
+        },
+        "type": "catalog"
+      }
     ]
   },
   {
     "id": "load-cell",
-    "name": { "ko": "로드셀", "en": "Load Cell" },
+    "name": {
+      "ko": "로드셀",
+      "en": "Load Cell"
+    },
     "model": "LC-500S",
     "manufacturer": "Zemic",
     "category": "electrical",
-    "description": { "ko": "하중 측정용 센서", "en": "Load measuring sensor" },
-    "keywords": ["load cell", "weight", "overload", "calibration", "signal", "로드셀", "하중", "과부하"],
+    "description": {
+      "ko": "하중 측정용 센서",
+      "en": "Load measuring sensor"
+    },
+    "keywords": [
+      "load cell",
+      "weight",
+      "overload",
+      "calibration",
+      "signal",
+      "로드셀",
+      "하중",
+      "과부하"
+    ],
     "updated": "2026-06-05",
     "images": [
-      { "file": "images/loadcell-mounting.svg", "caption": { "ko": "로드셀 장착 및 배선", "en": "Load cell mounting and wiring" } },
-      { "file": "images/loadcell-calibration.svg", "caption": { "ko": "Calibration 절차 셋업", "en": "Calibration procedure setup" } }
+      {
+        "file": "images/loadcell-mounting.svg",
+        "caption": {
+          "ko": "로드셀 장착 및 배선",
+          "en": "Load cell mounting and wiring"
+        }
+      },
+      {
+        "file": "images/loadcell-calibration.svg",
+        "caption": {
+          "ko": "Calibration 절차 셋업",
+          "en": "Calibration procedure setup"
+        }
+      }
     ],
     "documents": [
-      { "file": "documents/lc500s-calibration-record.pdf", "title": { "ko": "Calibration Record 양식", "en": "Calibration Record Form" }, "type": "calibration" }
+      {
+        "file": "documents/lc500s-calibration-record.pdf",
+        "title": {
+          "ko": "Calibration Record 양식",
+          "en": "Calibration Record Form"
+        },
+        "type": "calibration"
+      }
     ]
   },
   {
     "id": "load-limiter",
-    "name": { "ko": "로드리미터 (과부하방지장치)", "en": "Load Limiter" },
+    "name": {
+      "ko": "로드리미터 (과부하방지장치)",
+      "en": "Load Limiter"
+    },
     "model": "SH-1200A",
     "manufacturer": "SHINHAN ELECTRONICS (신한전자)",
     "category": "electrical",
-    "description": { "ko": "크레인 과부하를 검지하여 경보·차단하는 안전장치", "en": "Safety device that detects crane overload and triggers alarm/cutoff" },
-    "keywords": ["load limiter", "SH-1200A", "로드리미터", "과부하방지", "overload", "E-01", "E-02", "E-03", "E-04", "SPE-6.5T", "SBCA-X", "SLD-404", "신한전자", "SHINHAN"],
+    "description": {
+      "ko": "크레인 과부하를 검지하여 경보·차단하는 안전장치",
+      "en": "Safety device that detects crane overload and triggers alarm/cutoff"
+    },
+    "keywords": [
+      "load limiter",
+      "SH-1200A",
+      "로드리미터",
+      "과부하방지",
+      "overload",
+      "E-01",
+      "E-02",
+      "E-03",
+      "E-04",
+      "SPE-6.5T",
+      "SBCA-X",
+      "SLD-404",
+      "신한전자",
+      "SHINHAN"
+    ],
     "updated": "2026-08-12",
     "images": [],
     "documents": [
-      { "file": "documents/SH-1200A_User_Manual.pdf", "title": { "ko": "SH-1200A User Manual (D0LB231023 Rev.0)", "en": "SH-1200A User Manual (D0LB231023 Rev.0)" }, "type": "service-manual" }
+      {
+        "file": "documents/SH-1200A_User_Manual.pdf",
+        "title": {
+          "ko": "SH-1200A User Manual (D0LB231023 Rev.0)",
+          "en": "SH-1200A User Manual (D0LB231023 Rev.0)"
+        },
+        "type": "service-manual"
+      }
     ]
   },
   {
     "id": "dx-temp-controller",
-    "name": { "ko": "디지털 온도조절계 (DX Series)", "en": "Digital Temperature Controller (DX Series)" },
+    "name": {
+      "ko": "디지털 온도조절계 (DX Series)",
+      "en": "Digital Temperature Controller (DX Series)"
+    },
     "model": "DX series (DX4 / DX6 / DX7 / DX9)",
     "manufacturer": "한영넉스 (HANYOUNG NUX)",
     "category": "electrical",
-    "description": { "ko": "PID 방식으로 온도를 측정하고 히터/쿨러를 구동하는 디지털 온도조절계", "en": "PID digital temperature controller that measures temperature and drives a heater/cooler" },
-    "keywords": ["DX series", "온도조절계", "temperature controller", "PID", "한영넉스", "HANYOUNG NUX", "오토튜닝", "auto-tuning", "LBA", "loop break alarm", "Pt100", "RTD", "SSR", "OOOO", "UUUU"],
+    "description": {
+      "ko": "PID 방식으로 온도를 측정하고 히터/쿨러를 구동하는 디지털 온도조절계",
+      "en": "PID digital temperature controller that measures temperature and drives a heater/cooler"
+    },
+    "keywords": [
+      "DX series",
+      "온도조절계",
+      "temperature controller",
+      "PID",
+      "한영넉스",
+      "HANYOUNG NUX",
+      "오토튜닝",
+      "auto-tuning",
+      "LBA",
+      "loop break alarm",
+      "Pt100",
+      "RTD",
+      "SSR",
+      "OOOO",
+      "UUUU"
+    ],
     "updated": "2026-08-13",
     "images": [],
     "documents": [
-      { "file": "documents/DX-series-manual-ko.pdf", "title": { "ko": "DX Series 취급설명서 (국문)", "en": "DX Series Instruction Manual (Korean)" }, "type": "service-manual" },
-      { "file": "documents/DX-series-manual-en.pdf", "title": { "ko": "DX Series Instruction Manual (영문)", "en": "DX Series Instruction Manual (English)" }, "type": "service-manual" }
+      {
+        "file": "documents/DX-series-manual-ko.pdf",
+        "title": {
+          "ko": "DX Series 취급설명서 (국문)",
+          "en": "DX Series Instruction Manual (Korean)"
+        },
+        "type": "service-manual"
+      },
+      {
+        "file": "documents/DX-series-manual-en.pdf",
+        "title": {
+          "ko": "DX Series Instruction Manual (영문)",
+          "en": "DX Series Instruction Manual (English)"
+        },
+        "type": "service-manual"
+      }
     ]
   },
   {
     "id": "load-limiter-jdl100",
-    "name": { "ko": "로드리미터 (JDL-100/JDLS-70)", "en": "Load Limiter (JDL-100/JDLS-70)" },
+    "name": {
+      "ko": "로드리미터 (JDL-100/JDLS-70)",
+      "en": "Load Limiter (JDL-100/JDLS-70)"
+    },
     "model": "JDL-100 / JDLS-70",
     "manufacturer": "정호엔지니어링 (JUNGHO ENGINEERING)",
     "category": "electrical",
-    "description": { "ko": "AC 모터 과부하를 CT로 검지하여 릴레이로 전원을 차단하는 호이스트/크레인용 과부하방지장치", "en": "Overload protector for hoists/cranes that senses AC motor overcurrent via CT and cuts power through a relay" },
-    "keywords": ["load limiter", "과부하방지장치", "JDL-100", "JDLS-70", "정호엔지니어링", "JUNGHO", "JUNGHO ENGINEERING", "SafeGuard", "overload", "CT", "전류변성기", "auto reset", "자동복귀", "L mode", "H mode", "hoist", "crane"],
+    "description": {
+      "ko": "AC 모터 과부하를 CT로 검지하여 릴레이로 전원을 차단하는 호이스트/크레인용 과부하방지장치",
+      "en": "Overload protector for hoists/cranes that senses AC motor overcurrent via CT and cuts power through a relay"
+    },
+    "keywords": [
+      "load limiter",
+      "과부하방지장치",
+      "JDL-100",
+      "JDLS-70",
+      "정호엔지니어링",
+      "JUNGHO",
+      "JUNGHO ENGINEERING",
+      "SafeGuard",
+      "overload",
+      "CT",
+      "전류변성기",
+      "auto reset",
+      "자동복귀",
+      "L mode",
+      "H mode",
+      "hoist",
+      "crane"
+    ],
     "updated": "2026-08-13",
     "images": [],
     "documents": [
-      { "file": "documents/JDL-100-manual-ko.pdf", "title": { "ko": "로드리미터 취급설명서 (국문)", "en": "Load Limiter Instruction Manual (Korean)" }, "type": "service-manual" },
-      { "file": "documents/JDL-100-manual-en.pdf", "title": { "ko": "Load Limiter Specification & Instruction (영문)", "en": "Load Limiter Specification & Instruction (English)" }, "type": "service-manual" },
-      { "file": "documents/JDL-100-wiring-diagram.pdf", "title": { "ko": "JDL-100 전동호이스트 결선도", "en": "JDL-100 Electric Hoist Wiring Diagram" }, "type": "wiring-diagram" }
+      {
+        "file": "documents/JDL-100-manual-ko.pdf",
+        "title": {
+          "ko": "로드리미터 취급설명서 (국문)",
+          "en": "Load Limiter Instruction Manual (Korean)"
+        },
+        "type": "service-manual"
+      },
+      {
+        "file": "documents/JDL-100-manual-en.pdf",
+        "title": {
+          "ko": "Load Limiter Specification & Instruction (영문)",
+          "en": "Load Limiter Specification & Instruction (English)"
+        },
+        "type": "service-manual"
+      },
+      {
+        "file": "documents/JDL-100-wiring-diagram.pdf",
+        "title": {
+          "ko": "JDL-100 전동호이스트 결선도",
+          "en": "JDL-100 Electric Hoist Wiring Diagram"
+        },
+        "type": "wiring-diagram"
+      }
     ]
   },
   {
     "id": "np100-program-controller",
-    "name": { "ko": "프로그램 컨트롤러 (NP100)", "en": "Program Controller (NP100)" },
+    "name": {
+      "ko": "프로그램 컨트롤러 (NP100)",
+      "en": "Program Controller (NP100)"
+    },
     "model": "NP100",
     "manufacturer": "한영넉스 (HANYOUNG NUX)",
     "category": "electrical",
-    "description": { "ko": "패턴/세그먼트 기반 온도 프로그램 제어가 가능한 한영넉스 프로그램 온도조절계", "en": "HANYOUNG NUX program temperature controller supporting pattern/segment-based temperature profile control" },
-    "keywords": ["NP100", "프로그램컨트롤러", "program controller", "한영넉스", "HANYOUNG NUX", "패턴", "세그먼트", "segment", "PID", "오토튜닝", "auto-tuning", "RS485", "프로그램모드", "엔지니어링모드", "ramp soak"],
+    "description": {
+      "ko": "패턴/세그먼트 기반 온도 프로그램 제어가 가능한 한영넉스 프로그램 온도조절계",
+      "en": "HANYOUNG NUX program temperature controller supporting pattern/segment-based temperature profile control"
+    },
+    "keywords": [
+      "NP100",
+      "프로그램컨트롤러",
+      "program controller",
+      "한영넉스",
+      "HANYOUNG NUX",
+      "패턴",
+      "세그먼트",
+      "segment",
+      "PID",
+      "오토튜닝",
+      "auto-tuning",
+      "RS485",
+      "프로그램모드",
+      "엔지니어링모드",
+      "ramp soak"
+    ],
     "updated": "2026-08-14",
     "images": [],
     "documents": [
-      { "file": "documents/NP100-manual-ko.pdf", "title": { "ko": "NP100 프로그램컨트롤러 사용설명서 (국문)", "en": "NP100 Program Controller Instruction Manual (Korean)" }, "type": "service-manual" }
+      {
+        "file": "documents/NP100-manual-ko.pdf",
+        "title": {
+          "ko": "NP100 프로그램컨트롤러 사용설명서 (국문)",
+          "en": "NP100 Program Controller Instruction Manual (Korean)"
+        },
+        "type": "service-manual"
+      }
     ]
   }
 ]
