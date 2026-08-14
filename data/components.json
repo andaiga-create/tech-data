@@ -127,20 +127,15 @@
       "pressure",
       "flow",
       "speed control",
-      "hoisting",
-      "luffing",
-      "slewing",
       "비례밸브",
       "압력세팅",
       "유량세팅",
-      "호이스트",
-      "러핑",
-      "선회"
+
     ],
     "updated": "2026-08-14",
     "images": [
       {
-        "file": "components/pvg-valve/images/pvg-valve-setting-model.png",
+        "file": "images/pvg-valve-setting-model.png",
         "caption": {
           "ko": "PVG 밸브 압력 및 속도 조정 위치",
           "en": "PVG valve pressure and speed adjustment locations"
@@ -149,7 +144,7 @@
     ],
     "documents": [
       {
-        "file": "components/pvg-valve/documents/PVG-VALVE-SETTING-MODEL.pdf",
+        "file": "documents/PVG-VALVE-SETTING-MODEL.pdf",
         "title": {
           "ko": "PVG 밸브 설정 모델 도면",
           "en": "PVG Valve Setting Model Drawing"
@@ -157,7 +152,7 @@
         "type": "drawing"
       },
       {
-        "file": "components/pvg-valve/documents/PVG32-CATALOG.pdf",
+        "file": "documents/PVG32-CATALOG.pdf",
         "title": {
           "ko": "PVG 32 Technical Information",
           "en": "PVG 32 Technical Information"
