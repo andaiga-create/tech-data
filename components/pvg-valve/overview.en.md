@@ -1,13 +1,11 @@
-## Overview
+## PVG 32 Field Overview
 
-The PVG valve is a multi-spool directional control valve that individually and proportionally controls flow to each crane actuator (hoist, slewing, boom).
+PVG 32 is a **load-sensing (LS) proportional directional control valve**.
 
-This document is based on the **Danfoss PVG 32** series.
+For field service, check these three items first:
 
-> ℹ The PVG valve drives its spools with PVEH electro-proportional coils, adjusting flow in proportion to the joystick signal.
+- **PVP Main Relief**: overall maximum system pressure
+- **LSA / LSB Relief**: pressure limitation and flow limitation for each function
+- **A/B Speed Control**: maximum flow (function speed) adjustment
 
-### Key Functions
-
-- Flow control proportional to joystick input
-- Transmits the Load Sensing signal to the pump
-- Independent per-section pressure compensation minimizes interference during combined operation
+> ⚠ Settings shown on a reference drawing may differ from the actual crane design setting. Check the machine Hydraulic Diagram / Setting Sheet before adjustment.

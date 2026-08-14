@@ -1,16 +1,17 @@
-## Specifications
+## PVG 32 Key Specifications
 
-| Item | Spec |
-|---|---|
-| Manufacturer | Danfoss |
-| Model | PVG 32 |
-| Type | Proportional electro-hydraulic directional control valve |
-| Max Flow (per section) | 130 L/min |
-| Max Pressure | 350 bar |
-| Coil Type | PVEH (electro-proportional) |
-| Coil Rated Voltage | DC 12V / 24V (selectable) |
-| Coil Resistance (at 24V) | Approx. 5.6 Ω |
-| Max Sections | Up to 8 |
-| Operating Temperature | -30°C to +80°C |
+| Item | Value |
+|---|---:|
+| P Port continuous pressure | 350 bar |
+| P Port intermittent pressure | 400 bar |
+| A/B continuous pressure | 350 bar |
+| A/B intermittent pressure | 420 bar |
+| T Port static/dynamic | 25 / 40 bar |
+| A/B flow, pressure compensated | Max. 100 L/min |
+| A/B flow, without compensation | Max. 125 L/min |
+| Standard spool travel | ±7 mm |
+| Proportional range | ±4.8 mm |
+| Recommended oil temperature | 30–60 °C |
+| Contamination class | ISO 4406 23/19/16 |
 
-> ℹ Specifications are for reference only; the nameplate on the actual installed unit always takes precedence.
+> ⚠ These are PVG 32 Technical Information product ratings. The actual crane design pressure and flow settings have priority.

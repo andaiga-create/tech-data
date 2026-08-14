@@ -1,22 +1,42 @@
-## Setting
+## Pressure and Flow Setting
 
-| Item | Factory Default | Recommended | Adjustment Range |
-|---|---|---|---|
-| LS Pressure (Section) | Load pressure + 18 bar | Match pump LS margin | 15–25 bar |
-| Ramp Time (accel/decel) | 0.5 sec | Adjust per crane duty | 0.2–2.0 sec |
-| Dead Band | ±5% | ±3–8% | ±2–10% |
-| Max Spool Stroke Current | 800 mA | Per coil spec | 700–1000 mA |
+### 1. Main Relief / PVP
 
-### Setting Procedure
+- PVP pressure adjustment defines the **upper limit of system pressure**.
+- In a closed-center LS system, the catalog states that the PVP pressure relief should be set **approximately 30 bar above maximum system pressure**.
+- The actual crane target setting has priority.
 
-1. With the joystick in neutral, confirm the spool zero position
-2. Adjust the PVEH amplifier card's dead band to the specified range
-3. Adjust ramp time to the task (longer for precision work, shorter for fast work)
-4. Adjust LS pressure to match the pump's LS margin
-5. Verify flow linearity against joystick input across the full low-to-high speed range
+### 2. LSA / LSB Relief
 
-> ⚠ Setting the dead band too narrow can cause the actuator to react to minor joystick vibration, resulting in unintended micro-movement.
+- LSA = A-port pressure limitation
+- LSB = B-port pressure limitation
+- They can limit both maximum pressure and flow for an individual function.
+- When PVLP shock valves are used, the maximum LSA/B setting is limited by the PVLP setting.
 
-### Acceptance Criteria
+**Catalog limits**
 
-LS pressure within ±3% of setting; flow deviation within ±5% at 50% joystick input.
+- PVLP ≤ 150 bar → LSA/B ≤ 0.8 × PVLP
+- PVLP > 150 bar → PVLP − LSA/B ≥ 30 bar
+- Minimum LSA/B setting: 30 bar
+
+### 3. Speed / Flow Control
+
+- Speed Control adjusts the maximum flow of the function.
+- Increasing flow generally increases actuator speed.
+- PVG 32 A/B rated flow is up to 100 L/min with pressure compensation and 125 L/min without pressure compensation.
+- For pressure-control spools, maximum flow can be reduced by about 50% by limiting spool travel from 7 mm to 5.5 mm.
+
+### 4. Crane Functions
+
+| Function | Check |
+|---|---|
+| Hoisting | Hoisting Relief / Speed Control |
+| Luffing Up | Luffing Up Relief / Speed Control |
+| Luffing Down | Luffing Down Relief / Speed Control |
+| Slewing Left | Slewing Left Relief / Speed Control |
+| Slewing Right | Slewing Right Relief / Speed Control |
+| Overall system | Main Relief |
+
+> ⚠ Adjust pressure while monitoring with a pressure gauge. Adjust Speed Control in small increments and confirm the final value by functional testing.
+
+> ℹ The supplied field setting drawing shows **HEX 4 mm** for Relief adjustment and **HEX 3 mm** for Speed Control adjustment. The drawing shows **120 bar** as a relief setting example; compare it with the actual machine Setting Sheet before applying it.

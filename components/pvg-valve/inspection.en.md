@@ -1,21 +1,9 @@
-## Inspection
+## Pre-Setting Inspection
 
-> ⚠ Before inspecting the valve, ensure the related actuator load is safely supported. Opening the hydraulic circuit can cause the load to drop.
+1. Check hydraulic oil temperature and contamination condition.
+2. Connect a pressure gauge to the PVP gauge port.
+3. Check the A/B ports and LS line of the target function.
+4. Mark the original position of each adjustment screw.
+5. Confirm the target pressure and flow from the machine Setting Sheet.
 
-- [ ] Confirm power OFF and pressure released
-- [ ] Check PVEH coil connector engagement
-- [ ] Measure coil resistance (check for open/short circuit)
-- [ ] Check spool housing for leakage
-- [ ] Check LS line and compensator connections for leakage
-- [ ] Check for abnormal interference between sections (speed drop during simultaneous operation)
-- [ ] Confirm manual override pin operates correctly
-
-### Acceptance Criteria
-
-| Item | NORMAL | ABNORMAL |
-|---|---|---|
-| Coil Resistance | Within ±10% of manufacturer spec | Beyond spec, open circuit |
-| Leakage | None | Dripping at section joints |
-| Response | Linear proportional to joystick input | Excessive dead band, jerky response |
-
-> ✅ If any item is ABNORMAL, refer to the matching symptom in Troubleshooting.
+> ⚠ The PVG 32 catalog recommends an oil temperature of 30–60 °C.
