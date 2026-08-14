@@ -115,22 +115,10 @@
       "en": "Field reference for PVG 32 pressure and flow setting on shipboard cranes"
     },
     "keywords": [
-      "PVG32",
-      "PVG 32",
-      "proportional valve",
-      "load sensing",
-      "LS",
-      "main relief",
-      "PVP",
-      "LSA",
-      "LSB",
-      "pressure",
-      "flow",
-      "speed control",
-      "비례밸브",
-      "압력세팅",
-      "유량세팅",
-
+      "PVG32", "PVG 32", "proportional valve", "load sensing", "LS",
+      "main relief", "PVP", "LSA", "LSB", "pressure", "flow",
+      "speed control", "hoisting", "luffing", "slewing", "비례밸브",
+      "압력세팅", "유량세팅", "호이스트", "러핑", "선회"
     ],
     "updated": "2026-08-14",
     "images": [
