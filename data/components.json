@@ -101,7 +101,7 @@
     "name": { "ko": "로드리미터 (JDL-100/JDLS-70)", "en": "Load Limiter (JDL-100/JDLS-70)" },
     "model": "JDL-100 / JDLS-70",
     "manufacturer": "정호엔지니어링 (JUNGHO ENGINEERING)",
-    "category": "safety",
+    "category": "electrical",
     "description": { "ko": "AC 모터 과부하를 CT로 검지하여 릴레이로 전원을 차단하는 호이스트/크레인용 과부하방지장치", "en": "Overload protector for hoists/cranes that senses AC motor overcurrent via CT and cuts power through a relay" },
     "keywords": ["load limiter", "과부하방지장치", "JDL-100", "JDLS-70", "정호엔지니어링", "JUNGHO", "JUNGHO ENGINEERING", "SafeGuard", "overload", "CT", "전류변성기", "auto reset", "자동복귀", "L mode", "H mode", "hoist", "crane"],
     "updated": "2026-08-13",
