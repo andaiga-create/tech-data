@@ -452,7 +452,15 @@
       "jog"
     ],
     "updated": "2026-08-20",
-    "images": [],
+    "images": [
+      {
+        "file": "images/panel-nameplate.jpg",
+        "caption": {
+          "ko": "LOAD LIMITER 전면 조작부 및 명판 (LKDL-60A, SER.No L250208164)",
+          "en": "LOAD LIMITER front panel and nameplate (LKDL-60A, SER.No L250208164)"
+        }
+      }
+    ],
     "documents": [
       {
         "file": "documents/lkdl-60a-manual.pdf",
