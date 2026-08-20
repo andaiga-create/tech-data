@@ -21,3 +21,6 @@
 | Recommended C.T lead length | Within 1 m |
 
 > ℹ Specifications are for reference only — the nameplate on the actual installed unit always takes precedence. This product is built to domestic (Korea) specifications; for use outside Korea, consult LK HOIST CO., LTD.'s technical department separately.
+
+> ⚠ Needs verification (photo-read) — The field nameplate photo attached in the Photos tab shows `POWER AC90V ~ AC240V`, which differs from the manual's per-voltage build spec (AC24V/AC110V/AC220V built separately). The installed unit may be a wide-range input variant or a different nameplate revision — always re-verify the actual input voltage range against the physical nameplate before commissioning.
+
