@@ -115,10 +115,27 @@
       "en": "Field reference for PVG 32 pressure and flow setting on shipboard cranes"
     },
     "keywords": [
-      "PVG32", "PVG 32", "proportional valve", "load sensing", "LS",
-      "main relief", "PVP", "LSA", "LSB", "pressure", "flow",
-      "speed control", "hoisting", "luffing", "slewing", "비례밸브",
-      "압력세팅", "유량세팅", "호이스트", "러핑", "선회"
+      "PVG32",
+      "PVG 32",
+      "proportional valve",
+      "load sensing",
+      "LS",
+      "main relief",
+      "PVP",
+      "LSA",
+      "LSB",
+      "pressure",
+      "flow",
+      "speed control",
+      "hoisting",
+      "luffing",
+      "slewing",
+      "비례밸브",
+      "압력세팅",
+      "유량세팅",
+      "호이스트",
+      "러핑",
+      "선회"
     ],
     "updated": "2026-08-14",
     "images": [
@@ -392,6 +409,56 @@
         "title": {
           "ko": "NP100 프로그램컨트롤러 사용설명서 (국문)",
           "en": "NP100 Program Controller Instruction Manual (Korean)"
+        },
+        "type": "service-manual"
+      }
+    ]
+  },
+  {
+    "id": "load-limiter-lkdl60",
+    "name": {
+      "ko": "로드리미터 (LKDL-60A)",
+      "en": "Load Limiter (LKDL-60A)"
+    },
+    "model": "LKDL-60A",
+    "manufacturer": "LK HOIST CO., LTD. (주엘케이)",
+    "category": "electrical",
+    "description": {
+      "ko": "외장 변류기(C.T)로 MOTOR 전류를 검출하여 과부하 시 Relay로 전원을 차단하는 전기식 과부하 방지장치",
+      "en": "Electrical overload protector that senses motor current via an external C.T and cuts power through a relay on overload"
+    },
+    "keywords": [
+      "load limiter",
+      "로드리미터",
+      "과부하방지장치",
+      "LKDL-60A",
+      "LKDL-60",
+      "LK HOIST",
+      "엘케이",
+      "overload",
+      "CT",
+      "변류기",
+      "E-Pr",
+      "E-bC",
+      "EA-C",
+      "EAb-",
+      "E---",
+      "역상",
+      "결상",
+      "LOAd",
+      "L.-Lo.",
+      "H.-Lo.",
+      "인칭",
+      "jog"
+    ],
+    "updated": "2026-08-20",
+    "images": [],
+    "documents": [
+      {
+        "file": "documents/lkdl-60a-manual.pdf",
+        "title": {
+          "ko": "LOAD LIMITER 제품사양 및 사용설명서 (LKDL-60A)",
+          "en": "LOAD LIMITER Specification & Instruction Manual (LKDL-60A)"
         },
         "type": "service-manual"
       }
