@@ -318,5 +318,65 @@
         "type": "service-manual"
       }
     ]
+  },
+  {
+    "id": "electro-magnetic-brake",
+    "name": {
+      "ko": "전자브레이크 (스프링 작동형 DC 브레이크)",
+      "en": "Electro Magnetic Brake (Spring-Applied DC Brake)"
+    },
+    "model": "미기재 (현장 명판 확인 필요)",
+    "manufacturer": "미기재 (자료 내 제조사 표기 없음)",
+    "category": "mechanical",
+    "description": {
+      "ko": "스프링 작동형(Fail-Safe) DC 전자브레이크의 GAP 조정 및 점검을 위한 현장 실무 자료",
+      "en": "Field reference for gap adjustment and inspection of a fail-safe, spring-applied DC electro magnetic brake"
+    },
+    "keywords": [
+      "electro magnetic brake",
+      "전자브레이크",
+      "스프링브레이크",
+      "GAP",
+      "GAP 조정",
+      "gap adjustment",
+      "armature",
+      "아마추어",
+      "lining",
+      "라이닝",
+      "slip",
+      "슬립",
+      "torque adjustable bolt",
+      "hoist brake",
+      "호이스트 브레이크",
+      "fail-safe"
+    ],
+    "updated": "2026-08-22",
+    "images": [
+      {
+        "file": "images/electro-magnetic-brake-structure.jpg",
+        "caption": {
+          "ko": "전자브레이크 구조 및 GAP 조정 위치 (FIG.3)",
+          "en": "Electro magnetic brake structure and GAP adjustment locations (FIG.3)"
+        }
+      }
+    ],
+    "documents": [
+      {
+        "file": "documents/gap-adjustment-manual.pdf",
+        "title": {
+          "ko": "전자브레이크 기능 및 GAP 조정 매뉴얼 (PART 4)",
+          "en": "Electro Magnetic Brake — Function & GAP Adjustment Manual (PART 4)"
+        },
+        "type": "service-manual"
+      },
+      {
+        "file": "documents/daekwang-db-brake-manual-reference.pdf",
+        "title": {
+          "ko": "대광산업 DB BRAKE형 취급설명서 (참고용, 별도 모델)",
+          "en": "Daekwang Industry DB BRAKE Instruction Manual (Reference — different model)"
+        },
+        "type": "reference"
+      }
+    ]
   }
 ]
